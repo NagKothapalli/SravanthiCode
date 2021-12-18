@@ -50,12 +50,39 @@ namespace SravanthiSelenium.SeleniumAutomation
             driver.FindElement(By.ClassName("VfPpkd-vQzf8d")).Click();
             
         }
+        //Relative XPATH
+        //tagName[@attribute=value]
+        //tagName[text()=value]
+        //*[@attribute=value]
+        //*[text()=value]
+        //tagName[contains(@attribute,value)]
+        //tagName[contains(text(),value)]
+        //*[contains(@attribute,value)]
+        //*[contains(text(),value)]
+
+        //tagName[@attribute1=value  and @attribute2=value]     -  //student[@fname=ram  and @lname=krishna]
+        //tagName[text()=value]
+        //*[@attribute=value]
+        //*[text()=value]
+        //tagName[contains(@attribute,value)]
+        //tagName[contains(text(),value)]
+        //*[contains(@attribute,value)]
+        //*[contains(text(),value)]
         [TestMethod]
         public void ForgotEmail()
         {
             LaunchApplication();
             Console.WriteLine("RC : ForgotEmail ");
-            driver.FindElement(By.TagName("button")).Click();
+            // / html / body / div[1] / div[1] / div[2] / div / div[2] / div / div / div[2] / div / div[1] / div / form / span / section / div / div / div[3] / button
+            // driver.FindElement(By.TagName("button")).Click();
+            //Static /fixed / absolute
+            //driver.FindElement(By.XPath("/html/body/div[1]/div[1]/div[2]/div/div[2]/div/div/div[2]/div/div[1]/div/form/span/section/div/div/div[3]/button")).Click();
+            //driver.FindElement(By.XPath("//button[@jsname='Cuz2Ue']")).Click();
+            //driver.FindElement(By.XPath("//button[text()='Forgot email?']")).Click();
+            //driver.FindElement(By.XPath("//*[@jsname='Cuz2Ue']")).Click();
+            //driver.FindElement(By.XPath("//*[text()='Forgot email?']")).Click();
+            //driver.FindElement(By.XPath("//button[contains(text(),'Forgot')]")).Click();
+            driver.FindElement(By.XPath("//button[@type='button' and @jsname='Cuz2Ue']")).Click();
         }
         [TestMethod]
         public void LearnMore()
@@ -84,6 +111,14 @@ namespace SravanthiSelenium.SeleniumAutomation
             LaunchApplication();
             Console.WriteLine("RC : Terms ");
             driver.FindElement(By.LinkText("Terms")).Click();
+        }
+        
+        [TestMethod]
+        public void CreateAccount()
+        {
+            LaunchApplication();
+            Console.WriteLine("RC : Terms ");
+            driver.FindElement(By.XPath("//span[@class='VfPpkd-vQzf8d' and text()='Create account']")).Click();
         }
     }
 }
