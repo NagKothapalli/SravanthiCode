@@ -64,6 +64,7 @@
     <Compile Include="OopsConcepts\ConditionalStatements.cs" />
     <Compile Include="OopsConcepts\GmailAutomation.cs" />
     <Compile Include="OopsConcepts\LoopingStatements.cs" />
+    <Compile Include="SeleniumAutomation\ApsrtcAutomation.cs" />
     <Compile Include="SeleniumAutomation\GmailAutomation.cs" />
     <Compile Include="StringOperations.cs" />
     <Compile Include="UnitTest1.cs" />

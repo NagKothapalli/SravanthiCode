@@ -17,9 +17,11 @@ namespace SravanthiSelenium.SeleniumAutomation
         public GmailAutomation()
         {
             driver = new ChromeDriver();
+            driver.Manage().Window.Maximize();
+           // driver.Manage().Window.Minimize();
         }
 
-        [TestMethod]
+        [TestInitialize]
         public void LaunchApplication()
         {
             Console.WriteLine("RC : LaunchApplication");            
@@ -38,10 +40,16 @@ namespace SravanthiSelenium.SeleniumAutomation
             }
             Assert.AreEqual(ExpectedTitle, ActualTitle);            
         }
+        [TestCleanup]
+        public void CloseApplication()
+        {
+            Console.WriteLine("RC : CloseApplication");
+            driver.Close();
+        }
         [TestMethod]
         public void LoginToApplication()
         {
-            LaunchApplication();
+            //LaunchApplication();
             Console.WriteLine("RC : LoginToApplication ");
             driver.FindElement(By.Name("identifier")).Click();
             driver.FindElement(By.Name("identifier")).SendKeys("dfdgfdghghgfh");
@@ -50,6 +58,13 @@ namespace SravanthiSelenium.SeleniumAutomation
             driver.FindElement(By.ClassName("VfPpkd-vQzf8d")).Click();
             
         }
+        //WebDriver is an interface  which is implemented by classes like ChromDriver,FirefoxDriver,InternetExplorerDriver ... 
+        //WebDriver : GoToUrl, getTitle , getUrl , CurrentWindowHandle , CurrentWindowHandles , minimize , maximize , findElement , findElements , close , quit
+        // By : id , name , class , cssSlector , linkText , partialLinkText , tagName , xpath
+        //WebElement : click , clear , sendKeys , getText , getAttribute , IsDisplayed , IsEnabled
+        //Keys : We can click all the keys on the keyboard
+        //Select [DropDown]: selectByIndex , selectByVisibleText
+        //Exceptions : NoSuchElement , StaleElement , IndexOutOfBounds , NullPointer , 
         //Relative XPATH
         //tagName[@attribute=value]
         //tagName[text()=value]
@@ -71,7 +86,7 @@ namespace SravanthiSelenium.SeleniumAutomation
         [TestMethod]
         public void ForgotEmail()
         {
-            LaunchApplication();
+            //LaunchApplication();
             Console.WriteLine("RC : ForgotEmail ");
             // / html / body / div[1] / div[1] / div[2] / div / div[2] / div / div / div[2] / div / div[1] / div / form / span / section / div / div / div[3] / button
             // driver.FindElement(By.TagName("button")).Click();
@@ -87,28 +102,41 @@ namespace SravanthiSelenium.SeleniumAutomation
         [TestMethod]
         public void LearnMore()
         {
-            LaunchApplication();
+            //LaunchApplication();
             Console.WriteLine("RC : LearnMore ");
             driver.FindElement(By.TagName("a")).Click();
         }
         [TestMethod]
         public void Help()
         {
-            LaunchApplication();
+            //LaunchApplication();
             Console.WriteLine("RC : Help ");
-            driver.FindElement(By.LinkText("Help")).Click();
+            //driver.FindElement(By.LinkText("Help")).Click();
+            IList<IWebElement> collection = driver.FindElements(By.TagName("a")); // it will return group
+            for(int i=0;i<collection.Count;i++)
+            {
+                IWebElement My_i_th_element = collection.ElementAt(i); // it will return one element
+                string mytext = My_i_th_element.Text;
+                Console.WriteLine("Text of my element : " + mytext);
+                if (mytext.Equals("Help"))
+                {
+                    My_i_th_element.Click();
+                    break;
+                }
+            }
+
         }
         [TestMethod]
         public void Privacy()
         {
-            LaunchApplication();
+            //LaunchApplication();
             Console.WriteLine("RC : Privacy ");
             driver.FindElement(By.LinkText("Privacy")).Click();
         }
         [TestMethod]
         public void Terms()
         {
-            LaunchApplication();
+            //LaunchApplication();
             Console.WriteLine("RC : Terms ");
             driver.FindElement(By.LinkText("Terms")).Click();
         }
@@ -116,7 +144,7 @@ namespace SravanthiSelenium.SeleniumAutomation
         [TestMethod]
         public void CreateAccount()
         {
-            LaunchApplication();
+            //LaunchApplication();
             Console.WriteLine("RC : Terms ");
             driver.FindElement(By.XPath("//span[@class='VfPpkd-vQzf8d' and text()='Create account']")).Click();
         }
