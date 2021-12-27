@@ -65,7 +65,7 @@ namespace SravanthiSelenium.SeleniumAutomation
         //Keys : We can click all the keys on the keyboard
         //Select [DropDown]: selectByIndex , selectByVisibleText
         //Exceptions : NoSuchElement , StaleElement , IndexOutOfBounds , NullPointer , 
-        //Relative XPATH
+        //Relative XPATH  and Dynamic Xpath
         //tagName[@attribute=value]
         //tagName[text()=value]
         //*[@attribute=value]

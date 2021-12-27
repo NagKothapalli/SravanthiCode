@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Interactions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,8 +48,59 @@ namespace SravanthiSelenium.SeleniumAutomation
         {
             Console.WriteLine("RC : CloseApplication");
             Thread.Sleep(2000);
-            driver.Close();
+            //driver.Close();
         }
+        //WebDriver is an interface  which is implemented by classes like ChromDriver,FirefoxDriver,InternetExplorerDriver ... 
+        //WebDriver : GoToUrl, getTitle , getUrl , CurrentWindowHandle , CurrentWindowHandles , minimize , maximize , findElement , findElements , close , quit
+        // By : id , name , class , cssSlector , linkText , partialLinkText , tagName , xpath
+        //WebElement : click , clear , sendKeys , getText , getAttribute , IsDisplayed , IsEnabled , findElement , findElements
+        //Keys : We can click all the keys on the keyboard
+        //Select [DropDown]: selectByIndex , selectByVisibleText
+        //Exceptions : NoSuchElement , StaleElement , IndexOutOfBounds , NullPointer , 
+        //Actions : We can perform all Keyboard operations , all mouse operations
+        [TestMethod]
+        public void ChildElements()
+        {
+            Console.WriteLine("Child Element Concept , element inside element");
+            driver.FindElement(By.XPath("//input[@name='txtJourneyDate']")).Click();
+            IWebElement mytable = driver.FindElement(By.XPath("//table[@class='ui-datepicker-calendar']"));
+            IList<IWebElement>     myrows = mytable.FindElements(By.XPath("//tbody/tr"));
+            Console.WriteLine("My totlal rows :" + myrows.Count);
+            IList<IWebElement> mycolumns = myrows.ElementAt(0).FindElements(By.TagName("td"));
+            Console.WriteLine("My totlal columns :" + mycolumns.Count);
+        }
+        [TestMethod]
+        public void BookTicket()
+        {
+            Console.WriteLine("Test Case : BookTicket" );
+            //enter from city
+            driver.FindElement(By.XPath("//input[@name='source']")).SendKeys("HYDERABAD");
+            Actions actions = new Actions(driver);
+            Thread.Sleep(1000);
+            actions.SendKeys(Keys.Enter).Perform();
+            //accept alert
+            driver.FindElement(By.XPath("//input[@name='searchBtn']")).Click();
+            Thread.Sleep(3000);
+            driver.SwitchTo().Alert().Accept();
+            //enter to city
+            driver.FindElement(By.XPath("//input[@name='destination']")).SendKeys("GUNTUR");
+            Thread.Sleep(1000);
+            actions.SendKeys(Keys.Enter).Perform();
+            //open calender
+            driver.FindElement(By.XPath("//input[@name='txtJourneyDate']")).Click();
+            //select date
+            //driver.FindElement(By.XPath("//a[text()='8']")).Click();
+            SelectDate("9");
+            driver.FindElement(By.XPath("//input[@name='searchBtn']")).Click();
+        }
+
+        public void SelectDate(String JDate)
+        {
+            driver.FindElement(By.XPath("//a[text()='"+JDate+"']")).Click();  //Dynamic XPATH
+            int num = 22;
+            String name = "Ravi"+num+"Krishna";
+        }
+
         [TestMethod]
         public void ValidateFromCityTextBox()
         {
