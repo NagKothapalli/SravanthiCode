@@ -55,9 +55,18 @@ namespace SravanthiSelenium.SeleniumAutomation
         // By : id , name , class , cssSlector , linkText , partialLinkText , tagName , xpath
         //WebElement : click , clear , sendKeys , getText , getAttribute , IsDisplayed , IsEnabled , findElement , findElements
         //Keys : We can click all the keys on the keyboard
-        //Select [DropDown]: selectByIndex , selectByVisibleText
         //Exceptions : NoSuchElement , StaleElement , IndexOutOfBounds , NullPointer , 
         //Actions : We can perform all Keyboard operations , all mouse operations
+        //How to HandleMultiple Windows
+        //How to Handle WebAlert
+
+        //How to Handle Iframe
+        //Select [DropDown]: selectByIndex , selectByVisibleText
+        //Synchronization : Static Wait  / Implicit Wait / Exlicit Wait
+        //Exception Handlng : Try Catch
+        //Reading TestData from Config
+        //Framework implementation with PageObject Model
+        //Running TestCases on multiple browsers
         [TestMethod]
         public void ChildElements()
         {
@@ -69,6 +78,34 @@ namespace SravanthiSelenium.SeleniumAutomation
             IList<IWebElement> mycolumns = myrows.ElementAt(0).FindElements(By.TagName("td"));
             Console.WriteLine("My totlal columns :" + mycolumns.Count);
         }
+        [TestMethod]
+        public void KeyBoardAndMouseOperations()
+        {
+            Console.WriteLine("Test Case : BookTicket");
+            //enter from city
+            Actions actions = new Actions(driver);
+            IWebElement FromCityObject = driver.FindElement(By.XPath("//input[@name='source']"));
+            actions.MoveToElement(FromCityObject).Click().SendKeys("HYDERABAD").KeyDown(Keys.ArrowDown).SendKeys(Keys.Enter).Build().Perform();
+            //actions.MoveToElement(FromCityObject).Click().SendKeys("HYDERABAD").DoubleClick().ContextClick().KeyDown(Keys.ArrowDown).KeyDown(Keys.ArrowDown).Build().Perform();
+
+            Thread.Sleep(1000);
+        }
+        [TestMethod]
+        public void WorkWithMultipleWindows()
+        {
+            Console.WriteLine("Test Case : WorkWithMultipleWindows");
+            driver.FindElement(By.XPath("//a[@title='TimeTable / Track']")).Click();
+            driver.FindElement(By.XPath("//a[text()='All services Time Table & Tracking']")).Click();
+            IList<String> mywindows = driver.WindowHandles;
+            Console.WriteLine("How many windows :" + mywindows.Count); //2
+            driver.SwitchTo().Window(mywindows.ElementAt(1));
+            Console.WriteLine("Title of the Second Window :" + driver.Title);
+            //driver.Close();            
+            driver.SwitchTo().Window(mywindows.ElementAt(0));
+            driver.FindElement(By.XPath("//a[@title='Home']")).Click();
+            driver.Quit(); // TaskManager : Kill the Process
+        }
+
         [TestMethod]
         public void BookTicket()
         {
