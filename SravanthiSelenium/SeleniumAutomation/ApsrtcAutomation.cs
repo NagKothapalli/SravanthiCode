@@ -61,8 +61,9 @@ namespace SravanthiSelenium.SeleniumAutomation
         //How to Handle WebAlert
 
         //How to Handle Iframe
-        //Select [DropDown]: selectByIndex , selectByVisibleText
+        //Select [DropDown]: selectByIndex , selectByVisibleText , Anonymous Object creation
         //Synchronization : Static Wait  / Implicit Wait / Exlicit Wait
+        //JavaScriptExecutor : ScrollDown , Click object        
         //Exception Handlng : Try Catch
         //Reading TestData from Config
         //Framework implementation with PageObject Model
